@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
+    [SerializeField]AssetController assetController;
+
 
     Camera cam;
+    [SerializeField] GameObject RightHand;
 
     Vector2 moveInput;
     Vector2 lookInput;
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
         
 
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
     }
 
 
@@ -81,6 +84,19 @@ public class PlayerController : MonoBehaviour
             rb.drag = 0;
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
         }
+    }
+
+    public void prepShot()
+    {
+        RightHand.GetComponentInChildren<Spell>().Create();
+        assetController.ToggleHandFlip();
+    }
+
+    public void releaseShot()
+    {
+        RightHand.GetComponentInChildren<Spell>().Shoot();
+        assetController.ToggleHandFlip();
+
     }
 }
 

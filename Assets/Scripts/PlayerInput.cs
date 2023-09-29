@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,18 @@ public class PlayerInput : MonoBehaviour
         if (context.performed)
         {
             controller.getJumpInput();
+        }
+    }
+
+    public void shootInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            controller.prepShot();
+        }
+        else if (context.canceled)
+        {
+            controller.releaseShot();
         }
     }
 
