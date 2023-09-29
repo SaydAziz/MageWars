@@ -16,7 +16,12 @@ public class PlayerInput : MonoBehaviour
     public void moveInput(InputAction.CallbackContext context)
     {
         Debug.Log(context.ReadValue<Vector2>());
-        controller.Move(context.ReadValue<Vector2>());
+        controller.getMoveInput(context.ReadValue<Vector2>());
+    }
+
+    public void lookInput(InputAction.CallbackContext context)
+    {
+        controller.getLookInput(context.ReadValue<Vector2>());
     }
 
 }
