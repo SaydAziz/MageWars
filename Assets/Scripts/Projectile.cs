@@ -6,6 +6,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] public Rigidbody rb;
+    private void Awake()
+    {
+        rb.detectCollisions = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {

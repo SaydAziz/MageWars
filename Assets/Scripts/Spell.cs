@@ -13,6 +13,7 @@ public class Spell : MonoBehaviour
     }
     public void Shoot()
     {
+        cachedSpell.rb.detectCollisions = true;
         cachedSpell.gameObject.transform.parent = null;
         cachedSpell.rb.freezeRotation = false;
         cachedSpell.rb.constraints = RigidbodyConstraints.None;
