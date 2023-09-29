@@ -32,6 +32,13 @@ public class PlayerInput : MonoBehaviour
             controller.getJumpInput();
         }
     }
+    public void dashInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            controller.getDashInput();
+        }
+    }
 
     public void shootInput(InputAction.CallbackContext context)
     {

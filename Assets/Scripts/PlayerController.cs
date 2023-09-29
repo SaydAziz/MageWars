@@ -21,8 +21,10 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDir;
     float moveSpeed = 1.3f;
     float jumpHeight = 8f;
+    float dashSpeed = 16f;
 
     bool wallJumped;
+    bool dashed;
     bool isGrounded; 
     LayerMask groundLayer;
     LayerMask wallLayer;
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
+            dashed = false;
             rb.drag = 4;
             moveDir = transform.forward * moveInput.y + transform.right * moveInput.x;
             rb.AddForce(moveDir.normalized * moveSpeed, ForceMode.VelocityChange);
@@ -81,6 +84,17 @@ public class PlayerController : MonoBehaviour
     {
         cam.transform.Rotate(Vector3.right * (-lookInput.y * mouseSensitivity)); //needs to be clamped
         transform.Rotate(Vector3.up * (lookInput.x * mouseSensitivity));
+    }
+
+    public void getDashInput()
+    {
+        if (!dashed)
+        {
+            rb.velocity = Vector3.zero;
+            rb.AddForce(((transform.forward * moveInput.y + transform.right * moveInput.x) + transform.up * .2f)* dashSpeed, ForceMode.Impulse);
+            dashed = true;
+        }
+        
     }
 
     public void getMoveInput(Vector2 value)
@@ -105,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(WJCD());
             rb.drag = 0;
+            rb.velocity = Vector3.zero;
             rb.AddForce((transform.forward + (Vector3.up))  * (2 + jumpHeight),  ForceMode.Impulse);
         }
     }
@@ -124,8 +139,8 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckWall()
     {
-        wallFwdR = Physics.Raycast(transform.position, transform.right, out WallHit, 2f, groundLayer);
-        wallFwdL = Physics.Raycast(transform.position, -transform.right, out WallHit, 2f, groundLayer);
+        wallFwdR = Physics.Raycast(transform.position, transform.right, out WallHit, 3f, groundLayer);
+        wallFwdL = Physics.Raycast(transform.position, -transform.right, out WallHit, 3f, groundLayer);
         //Debug.Log(wallFwd);
 
         if (wallFwdL || wallFwdR)
