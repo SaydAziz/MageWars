@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDir;
     float moveSpeed = 1f;
+    float jumpHeight = 8f;
 
     bool isGrounded;
     LayerMask groundLayer;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.7f, groundLayer);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1f, groundLayer);
 
         if (isGrounded)
         {
@@ -71,6 +72,15 @@ public class PlayerController : MonoBehaviour
     public void getLookInput(Vector2 value)
     {
         lookInput = value;
+    }
+
+    public void getJumpInput()
+    {
+        if (isGrounded)
+        {
+            rb.drag = 0;
+            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        }
     }
 }
 

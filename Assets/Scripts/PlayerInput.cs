@@ -24,4 +24,12 @@ public class PlayerInput : MonoBehaviour
         controller.getLookInput(context.ReadValue<Vector2>());
     }
 
+    public void jumpInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            controller.getJumpInput();
+        }
+    }
+
 }
