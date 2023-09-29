@@ -16,7 +16,7 @@ public class Spell : MonoBehaviour
         cachedSpell.gameObject.transform.parent = null;
         cachedSpell.rb.freezeRotation = false;
         cachedSpell.rb.constraints = RigidbodyConstraints.None;
-        cachedSpell.rb.velocity = transform.forward * 10;
+        cachedSpell.rb.velocity = transform.forward * 20;
 
         cachedSpell.Shoot();
     }
