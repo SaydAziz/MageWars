@@ -4,17 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - IDamages
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - FPSrender
   - Water
   - UI
-  - Wall
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
   - 
   - 
   - 
